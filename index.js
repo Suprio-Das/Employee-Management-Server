@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 // Middlewares
-app.use(express());
+app.use(express.json());
 app.use(cors());
 
 // Testing Route
@@ -48,6 +48,8 @@ async function run() {
         app.put('/admins/:email', async (req, res) => {
             const email = req.params.email;
             const filter = { email: email };
+            const data = req.body;
+            console.log(data);
             const updatedAdmin = {
                 $set: {
                     name: req.body.name,
