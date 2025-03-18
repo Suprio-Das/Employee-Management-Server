@@ -67,6 +67,11 @@ async function run() {
 
         // employee routes starts----------------------------------------
 
+        app.get('/employees', async (req, res) => {
+            const data = await employeesCollection.find().toArray();
+            res.send(data);
+        })
+
         app.post('/employees', async (req, res) => {
             const data = req.body;
             const result = await employeesCollection.insertOne(data);
