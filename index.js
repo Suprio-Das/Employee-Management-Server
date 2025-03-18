@@ -64,6 +64,16 @@ async function run() {
         })
 
         // admin routes ends---------------------------------------------
+
+        // employee routes starts----------------------------------------
+
+        app.post('/employees', async (req, res) => {
+            const data = req.body;
+            const result = await employeesCollection.insertOne(data);
+            res.send(result);
+        })
+
+        // employee routes ends------------------------------------------
     } finally {
         // await client.close();
     }
