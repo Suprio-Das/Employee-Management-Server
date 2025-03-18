@@ -37,9 +37,27 @@ async function run() {
         // admin routes starts------------------------------------------
 
         // Logged-in admin
-        app.get('/admins', async (req, res) => {
-            const email = req.body.email;
-            const result = await adminCollection.findOne(email);
+        app.get('/admins/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = { email: email };
+            const result = await adminCollection.findOne(query);
+            res.send(result);
+        })
+
+        // update logged-in admin info
+        app.put('/admins/:email', async (req, res) => {
+            const email = req.params.email;
+            const filter = { email: email };
+            const updatedAdmin = {
+                $set: {
+                    name: req.body.name,
+                    designation: req.body.designation,
+                    phone: req.body.phone,
+                    photo: req.body.photo
+                }
+            }
+
+            const result = await adminCollection.updateOne(filter, updatedAdmin);
             res.send(result);
         })
 
