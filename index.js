@@ -33,6 +33,17 @@ async function run() {
         const database = client.db('EmployeeManagement');
         const adminCollection = database.collection('admins');
         const employeesCollection = database.collection('employees');
+
+        // admin routes starts------------------------------------------
+
+        // Logged-in admin
+        app.get('/admins', async (req, res) => {
+            const email = req.body.email;
+            const result = await adminCollection.findOne(email);
+            res.send(result);
+        })
+
+        // admin routes ends---------------------------------------------
     } finally {
         // await client.close();
     }
