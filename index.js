@@ -95,6 +95,13 @@ async function run() {
             res.send(result);
         })
 
+        app.delete('/employees/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) };
+            const deletedEmployee = await employeesCollection.deleteOne(query);
+            res.send(deletedEmployee);
+        })
+
         // employee routes ends------------------------------------------
     } finally {
         // await client.close();
