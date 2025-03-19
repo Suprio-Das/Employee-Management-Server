@@ -85,6 +85,7 @@ async function run() {
             const updatedEmployee = {
                 $set: {
                     name: data.name,
+                    email: data.email,
                     phone: data.phone,
                     designation: data.designation,
                     department: data.department,
